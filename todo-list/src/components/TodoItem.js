@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-
 import TodoContent from './TodoContent';
+import AddTodo from './AddTodo';
 
 class TodoItem extends Component {
   constructor() {
@@ -8,49 +8,60 @@ class TodoItem extends Component {
     this.state = {
       todoItem: [
         {id: 1, name: 'Hello', isDelete: false},
-        {id: 2, name: 'Hi', isDelete: true},
+        {id: 2, name: 'Hi', isDelete: false},
         {id: 3, name: 'Goodbye', isDelete: false},
       ],
     }
   }
 
-  // onChangeStatus = (id) => {
-  //   this.setState({
-  //     this.states.todoItem.map(
-  //     (item, index) => {
-  //       if (id == item.id) {
-  //         return (...item, isDelete: !item.isDelete);
-  //       }
-  //       return item;
-  //     })
-  //   })
-  // }
+  onChangeStatus = (id) => {
+    this.setState({
+      todoItem: this.state.todoItem.map(
+      item => {
+        if(parseInt(id) === item.id) {
+          console.log(id);
+          return ({...item, isDelete: !item.isDelete});
+        }
+        return item;
+      })
+    })
+  }
+
+  onInsert = (value) => {
+    let newTask = { 
+      id: this.state.todoItem.length + 1, 
+      name: value, 
+      isComplete: false 
+    };
+    let todoItem = this.state.todoItem.concat(newTask);
+    this.setState({todoItem: todoItem});
+    // this.setState({
+    //   todoItem: this.state.todoItem.push({
+    //     id: this.state.todoItem.length +1 ,
+    //     name: value,
+    //     isDelete: false
+    //   })
+    // })
+    // console.log(this.state.todoItem);
+  }
 
   render() {
     return (
       <div className="TodoItem">
-        <input type="text" placeholder="What need to be done?"/>
-        <br/>
+        <AddTodo onAddList = {this.onInsert}/>
         <div className="content-todo">
           {
             this.state.todoItem.map(
               (item, index) => 
               <TodoContent 
-                key = {item.id} 
-                content={item.name} 
-                status={item.isDelete}
+                key = { item.id }
+                id = { item.id }
+                content= { item.name } 
+                status= { item.isDelete }
                 onChangeStatus = {this.onChangeStatus}
               />
-              )
+            )
           }
-        </div>
-
-        <div className="footer-todo">
-          <span>item(s) left</span>
-          <button>Clear completed</button>
-          <button>Completed</button>
-          <button>Active</button>
-          <button>All Tasks</button>
         </div>
       </div>
     );

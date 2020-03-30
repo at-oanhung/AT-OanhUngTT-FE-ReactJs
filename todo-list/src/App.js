@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
       <div className="container">
-        <header className="App-header">
-          <h1>Todo</h1>
-        </header>
-
+        <Header/>
         <TodoItem/>
+        <Footer/>
       </div>
     </div>
   );
