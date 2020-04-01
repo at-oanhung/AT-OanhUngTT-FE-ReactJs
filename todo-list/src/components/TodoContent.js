@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 
 class TodoContent extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.checkStatus = this.checkStatus.bind(this);
+  }
   
-  checkStatus = (e) => {
+  checkStatus(e) {
     this.props.onChangeStatus(e.target.value);
+  }
+
+  deleteTodo = (e) => {
+    this.props.onDelete(e.target.value);
   }
 
   render() {
@@ -18,11 +23,12 @@ class TodoContent extends Component {
     return (
       <div className={ nameClass }>
         <input 
-          type="checkbox" 
+          type="checkbox"
           value= { this.props.id }
           onClick={ this.checkStatus }
         />
         <label> { this.props.content } </label>
+        <button value = { this.props.id } onClick = {this.deleteTodo}>X</button>
       </div>
     );
   }
