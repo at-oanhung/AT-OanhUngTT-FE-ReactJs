@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TodoItem from './components/TodoItem';
+import TodoList from './components/TodoList';
 import Header from './components/Header';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <div className="container">
         <Header/>
-        <TodoItem/>
+        <TodoList/>
       </div>
     </div>
   );

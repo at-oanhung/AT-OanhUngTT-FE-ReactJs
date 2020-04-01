@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 
 class Footer extends Component {
-  allTasks = (e) => {
+  constructor(props) {
+    super(props);
+    this.allTasks = this.allTasks.bind(this);
+  }
+
+  allTasks(e) {
     this.props.onAllTasks(e.target.value);
   }
   
