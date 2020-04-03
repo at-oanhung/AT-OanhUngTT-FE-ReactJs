@@ -3,6 +3,15 @@ import TodoItem from './TodoItem';
 import AddTodo from './AddTodo';
 import Footer from './Footer';
 
+/**
+* @Class TodoList
+* Data: todoItem(id,name,isDelete,isComplete) inside 
+*   isDelete check status Delete
+*   isComplete check status work
+* About - AddTodo, TodoItem, Footer
+* AddTodo - @param {value} - add list
+* Footer - @param {tabIndex} - show data TodoList
+*/
 class TodoList extends Component {
   constructor() {
     super();
@@ -12,6 +21,12 @@ class TodoList extends Component {
         {id: 2, name: 'Hi', isDelete: false, isComplete: false},
         {id: 3, name: 'Goodbye', isDelete: false, isComplete: false},
       ],
+      tab: [
+        {id: 1, title: 'Completed'},
+        {id: 2, title: 'Active'},
+        {id: 3, title: 'All Tasks'},
+      ],
+      tabIndex: 3,
     }
     this.countTodo = this.countTodo.bind(this);
   }
@@ -29,23 +44,15 @@ class TodoList extends Component {
   }
 
   onInsert = (value) => {
-    let newTask = { 
-      id: this.state.todoItem.length + 1,
-      name: value, 
+    this.state.todoItem.push({
+      id: this.state.todoItem.length +1,
+      name: value,
       isDelete: false,
       isComplete: false
-    };
-    let todoItem = this.state.todoItem.concat(newTask);
-    this.setState({todoItem: todoItem});
-    // this.setState({
-    //   todoItem: this.state.todoItem.push({
-    //     id: this.state.todoItem.length +1 ,
-    //     name: value,
-    //     isDelete: false,
-    //     isComplete: false
-    //   })
-    // })
-    // console.log(this.state.todoItem);
+    })
+    this.setState({
+      todoItem: this.state.todoItem
+    })
   }
 
   onDelete = (id) => {
@@ -60,8 +67,10 @@ class TodoList extends Component {
     })
   }
 
-  onAllTasks = () => {
-    this.setState({todoItem: this.state.todoItem});
+  onShowTab = (value) => {
+    this.setState({
+      tabIndex: value,
+    });
   }
 
   onClearCompleted = () => {
@@ -80,20 +89,33 @@ class TodoList extends Component {
     let count = 0;
     this.state.todoItem.map(
       item => {
-        if(!item.isComplete) {
+        if(!item.isComplete && !item.isDelete) {
           count++;
         }
       return count;
     })
+    return count;
   }
 
   render() {
+    const { todoItem, tabIndex } = this.state;
+    const todo = ( tabIndex ) => {
+      switch (tabIndex) {
+        case 2:
+          return todoItem.filter(item => !item.isComplete);
+        case 1:
+          return todoItem.filter(item => item.isComplete);
+        default:
+          return todoItem;
+      }
+    };
+
     return (
       <div className="TodoList">
         <AddTodo onAddList = {this.onInsert}/>
         <div className="content-todo">
           {
-            this.state.todoItem.map(
+            todo(tabIndex).map(
               (item, index) => {
                 if (!item.isDelete) {
                   return(
@@ -113,10 +135,10 @@ class TodoList extends Component {
         </div>
         <Footer 
           item = { this.countTodo() }
-          onAllTasks = { this.onAllTasks }
-          onActive = { this.onActive }
-          onCompleted = {this.onCompleted }
-          onClear = {this.onClearCompleted } />
+          changeTabIndex = { this.onShowTab }
+          onClear = {this.onClearCompleted }
+          tab = {this.state.tab}
+          tabIndex = {this.state.tabIndex} />
       </div>
     );
   }

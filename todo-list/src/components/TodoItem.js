@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
 
+/**
+* @Class TodoItem
+* checkbox - changes Status work done and not done
+* work not done - add class 'active'
+* button Delete - delete work
+* return value(checkStatus, deleteTodo) for TodoList
+*/
 class TodoItem extends Component {
   constructor(props) {
     super(props);

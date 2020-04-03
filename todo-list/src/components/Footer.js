@@ -3,33 +3,32 @@ import React, {Component} from 'react';
 class Footer extends Component {
   constructor(props) {
     super(props);
-    this.allTasks = this.allTasks.bind(this);
-  }
-
-  allTasks(e) {
-    this.props.onAllTasks(e.target.value);
+    this.clearCompleted = this.clearCompleted.bind(this);
   }
   
-  active = (e) => {
-    this.props.onActive(e.target.value);
-  }
-
-  completed = (e) => {
-    this.props.onCompleted(e.target.value);
-  }
-  
-  clearCompleted = (e) => {
+  clearCompleted(e) {
     this.props.onClear(e.target.value);
   }
-  
+
   render() {
     return (
       <div className="footer-todo">
         <span>{this.props.item} item(s) left</span>
         <button onClick = { this.clearCompleted } >Clear completed</button>
-        <button onClick = { this.completed } >Completed</button>
-        <button onClick = { this.active }>Active</button>
-        <button onClick = { this.allTasks } >All Tasks</button>
+        {  this.props.tab.map(
+          tabContent => {
+            return (
+              <button
+                key={tabContent.id}
+                className={
+                  `tab-link ${this.props.tabIndex === tabContent.id ? "active" : ""}`
+                }
+                onClick={() => this.props.changeTabIndex(tabContent.id)} >
+                {tabContent.title}
+              </button>
+            );
+          })
+        }
       </div>
     );
   }
