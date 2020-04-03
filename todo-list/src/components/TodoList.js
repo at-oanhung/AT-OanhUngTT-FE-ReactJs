@@ -6,19 +6,6 @@ import TodoItem from './TodoItem';
 * About component - TodoItem
 */
 class TodoList extends Component {
-  constructor() {
-    super();
-    this.onChangeStatus = this.onChangeStatus.bind(this);
-  }
-
-  onChangeStatus(id) {
-    this.props.onChangeStatus(id);
-  }
-
-  onDelete = (id) => {
-    this.props.onDelete(id);
-  }
-
   render() {
     const { todoItem, tabIndex } = this.props;
     const todoList = ( tabIndex ) => {
@@ -44,8 +31,8 @@ class TodoList extends Component {
                   id = { item.id }
                   content= { item.name } 
                   status= { item.isComplete }
-                  onChangeStatus = {this.onChangeStatus}
-                  onDelete = {this.onDelete} 
+                  onChangeStatus = {this.props.onChangeStatus}
+                  onDelete = {this.props.onDelete} 
                 />)
               }
               return '';
