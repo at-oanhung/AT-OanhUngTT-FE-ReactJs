@@ -29,13 +29,13 @@ class AddTodo extends Component {
 
   handleChange(event) {
     this.setState({
-      valueTodo: event.target.value
+      valueTodo: event.target.value,
     });
   }
 
   render() {
     return (
-      <div>
+      <div className="AddTodo">
         <input 
           type="text"
           placeholder="What need to be done?"
