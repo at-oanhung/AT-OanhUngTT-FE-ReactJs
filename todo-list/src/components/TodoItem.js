@@ -10,6 +10,11 @@ import React, {Component} from 'react';
 class TodoItem extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      valueTodo: this.props.id,
+    };
+
+    this.handleChange = this.handleChange.bind(this);
     this.checkStatus = this.checkStatus.bind(this);
   }
   
@@ -19,6 +24,14 @@ class TodoItem extends Component {
 
   deleteTodo = (e) => {
     this.props.onDelete(e.target.value);
+  }
+
+
+
+  handleChange(event) {
+    this.setState({
+      valueTodo: event.target.value,
+    });
   }
 
   render() {
@@ -31,8 +44,10 @@ class TodoItem extends Component {
       <div className={ nameClass }>
         <input 
           type="checkbox"
-          value= { this.props.id }
+          value= { this.state.valueTodo }
           onClick={ this.checkStatus }
+          checked = {this.props.status }
+          onChange={this.handleChange}
         />
         <label> { this.props.content } </label>
         <button value = { this.props.id } onClick = {this.deleteTodo}>X</button>
@@ -41,4 +56,4 @@ class TodoItem extends Component {
   }
 }
 
-export default TodoItem;
+export {TodoItem};

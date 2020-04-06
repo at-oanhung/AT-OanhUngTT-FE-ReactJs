@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TodoItem from './TodoItem';
+import {TodoItem} from './TodoItem';
 
 /**
 * @Class TodoList
@@ -44,4 +44,4 @@ class TodoList extends Component {
   }
 }
 
-export default TodoList;
+export {TodoList};
