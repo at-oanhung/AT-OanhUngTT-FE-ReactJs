@@ -35,6 +35,30 @@ export class App extends Component {
     this.countTodo = this.countTodo.bind(this);
   }
 
+  componentDidMount() {
+    const { todoItem, tabIndex } = this.state;
+    const todoList = JSON.parse(localStorage.getItem('todoList'));
+    const tabName = JSON.parse(localStorage.getItem('tabName'));
+    if(todoList) {
+      this.setState({ todoItem: todoList });
+    } else {
+      localStorage.setItem('todoList', JSON.stringify(todoItem));
+    }
+
+    if(tabName) {
+      this.setState({ tabIndex: tabName });
+    } else {
+      localStorage.setItem('tabName', JSON.stringify(tabIndex));
+    }
+  }
+
+  componentDidUpdate() {
+    const { todoItem, tabIndex } = this.state;
+    localStorage.setItem('todoList', JSON.stringify(todoItem));
+    localStorage.setItem('tabName', JSON.stringify(tabIndex));
+  }
+
+
   onChangeStatus = (id) => {
     this.setState({
       todoItem: this.state.todoItem.map(
