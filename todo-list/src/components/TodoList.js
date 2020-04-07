@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import TodoItem from './TodoItem';
+import {TodoItem} from './TodoItem';
 
 /**
 * @Class TodoList
 * About component - TodoItem
 */
-class TodoList extends Component {
+export class TodoList extends Component {
   render() {
     const { todoItem, tabIndex } = this.props;
     const todoList = ( tabIndex ) => {
@@ -43,5 +43,3 @@ class TodoList extends Component {
     );
   }
 }
-
-export default TodoList;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Footer extends Component {
+export class Footer extends Component {
   constructor(props) {
     super(props);
     this.clearCompleted = this.clearCompleted.bind(this);
@@ -33,5 +33,3 @@ class Footer extends Component {
     );
   }
 }
-
-export default Footer;

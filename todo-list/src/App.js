@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {Helmet} from 'react-helmet';
 import './App.css';
-import TodoList from './components/TodoList';
-import Header from './components/Header';
-import AddTodo from './components/AddTodo';
-import Footer from './components/Footer';
+import {TodoList} from './components/TodoList';
+import {Header} from './components/Header';
+import {AddTodo} from './components/AddTodo';
+import {Footer} from './components/Footer';
 
 /**
 * @Class App
@@ -15,13 +16,13 @@ import Footer from './components/Footer';
 * TodoList
 * Footer - @param {tabIndex} - show data TodoList
 */
-class App extends Component {
+export class App extends Component {
   constructor() {
     super();
     this.state = {
       todoItem: [
         {id: 1, name: 'Hello', isDelete: false, isComplete: false},
-        {id: 2, name: 'Hi', isDelete: false, isComplete: false},
+        {id: 2, name: 'Hi', isDelete: false, isComplete: true},
         {id: 3, name: 'Goodbye', isDelete: false, isComplete: false},
       ],
       tab: [
@@ -101,8 +102,12 @@ class App extends Component {
   }
 
   render() {
+    let countItem =  this.countTodo();
     return (
       <div className="App">
+        <Helmet>
+          <title>{ `Todo (${countItem})` }</title>
+        </Helmet>
         <div className="container">
           <Header/>
           <AddTodo onAddList = {this.onInsert}/>
@@ -112,7 +117,7 @@ class App extends Component {
             onChangeStatus = {this.onChangeStatus}
             onDelete = {this.onDelete} />
           <Footer 
-            item = { this.countTodo() }
+            item = { countItem }
             changeTabIndex = { this.onShowTab }
             onClear = {this.onClearCompleted }
             tab = {this.state.tab}
@@ -122,5 +127,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
