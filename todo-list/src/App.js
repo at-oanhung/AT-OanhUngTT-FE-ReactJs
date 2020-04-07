@@ -52,10 +52,14 @@ export class App extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     const { todoItem, tabIndex } = this.state;
-    localStorage.setItem('todoList', JSON.stringify(todoItem));
-    localStorage.setItem('tabName', JSON.stringify(tabIndex));
+    if (todoItem !== prevState.todoItem) {
+      localStorage.setItem('todoList', JSON.stringify(todoItem));
+    }
+    if (tabIndex !== prevState.tabIndex) {
+      localStorage.setItem('tabName', JSON.stringify(tabIndex));
+    }
   }
 
   onChangeStatus = (id) => {
@@ -71,14 +75,15 @@ export class App extends Component {
   }
 
   onInsert = (value) => {
-    this.state.todoItem.push({
+    let newTodo = { 
       id: this.state.todoItem.length +1,
       name: value,
       isDelete: false,
       isComplete: false
-    })
+    };
+    let todoItemNew = this.state.todoItem.concat(newTodo);
     this.setState({
-      todoItem: this.state.todoItem
+      todoItem: todoItemNew,
     })
   }
 
