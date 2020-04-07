@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 * button Delete - delete work
 * return value(checkStatus, deleteTodo) for TodoList
 */
-class TodoItem extends Component {
+export class TodoItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,5 +55,3 @@ class TodoItem extends Component {
     );
   }
 }
-
-export {TodoItem};

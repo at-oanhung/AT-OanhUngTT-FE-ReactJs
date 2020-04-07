@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Helmet} from "react-helmet";
+import {Helmet} from 'react-helmet';
 import './App.css';
 import {TodoList} from './components/TodoList';
 import {Header} from './components/Header';
@@ -16,7 +16,7 @@ import {Footer} from './components/Footer';
 * TodoList
 * Footer - @param {tabIndex} - show data TodoList
 */
-class App extends Component {
+export class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -127,5 +127,3 @@ class App extends Component {
     );
   }
 }
-
-export {App};

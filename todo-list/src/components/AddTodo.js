@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 * Input - When chages data and press 'enter' (value != '')
 * return value for TodoList
 */
-class AddTodo extends Component {
+export class AddTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,5 +47,3 @@ class AddTodo extends Component {
     );
   }
 }
-
-export {AddTodo};
