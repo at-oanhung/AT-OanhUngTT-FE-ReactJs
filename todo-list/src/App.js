@@ -58,7 +58,6 @@ export class App extends Component {
     localStorage.setItem('tabName', JSON.stringify(tabIndex));
   }
 
-
   onChangeStatus = (id) => {
     this.setState({
       todoItem: this.state.todoItem.map(
