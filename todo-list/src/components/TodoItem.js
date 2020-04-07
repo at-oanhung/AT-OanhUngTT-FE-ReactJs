@@ -26,8 +26,6 @@ export class TodoItem extends Component {
     this.props.onDelete(e.target.value);
   }
 
-
-
   handleChange(event) {
     this.setState({
       valueTodo: event.target.value,
