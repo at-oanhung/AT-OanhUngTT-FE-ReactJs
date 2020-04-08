@@ -35,6 +35,33 @@ export class App extends Component {
     this.countTodo = this.countTodo.bind(this);
   }
 
+  componentDidMount() {
+    const { todoItem, tabIndex } = this.state;
+    const todoList = JSON.parse(localStorage.getItem('todoList'));
+    const tabName = JSON.parse(localStorage.getItem('tabName'));
+    if(todoList) {
+      this.setState({ todoItem: todoList });
+    } else {
+      localStorage.setItem('todoList', JSON.stringify(todoItem));
+    }
+
+    if(tabName) {
+      this.setState({ tabIndex: tabName });
+    } else {
+      localStorage.setItem('tabName', JSON.stringify(tabIndex));
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { todoItem, tabIndex } = this.state;
+    if (todoItem !== prevState.todoItem) {
+      localStorage.setItem('todoList', JSON.stringify(todoItem));
+    }
+    if (tabIndex !== prevState.tabIndex) {
+      localStorage.setItem('tabName', JSON.stringify(tabIndex));
+    }
+  }
+
   onChangeStatus = (id) => {
     this.setState({
       todoItem: this.state.todoItem.map(
@@ -48,14 +75,15 @@ export class App extends Component {
   }
 
   onInsert = (value) => {
-    this.state.todoItem.push({
+    let newTodo = { 
       id: this.state.todoItem.length +1,
       name: value,
       isDelete: false,
       isComplete: false
-    })
+    };
+    let todoItemNew = this.state.todoItem.concat(newTodo);
     this.setState({
-      todoItem: this.state.todoItem
+      todoItem: todoItemNew,
     })
   }
 
