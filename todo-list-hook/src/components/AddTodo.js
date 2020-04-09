@@ -23,9 +23,9 @@ export function AddTodo(props) {
       <input 
         type="text"
         placeholder="What need to be done?" 
-        value= { valueTodo }
-        onChange={ handleChange}
-        onKeyPress={ addList }
+        value = { valueTodo }
+        onChange = { handleChange}
+        onKeyPress = { addList }
       />
     </div>
   );
