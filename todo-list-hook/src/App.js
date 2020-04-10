@@ -10,6 +10,12 @@ export function App() {
         {id: 2, name: 'Hi', isDelete: false, isComplete: true},
         {id: 3, name: 'Goodbye', isDelete: false, isComplete: false},
       ]);
+  const [tab] = useState([
+        {id: 1, title: 'Completed'},
+        {id: 2, title: 'Active'},
+        {id: 3, title: 'All Tasks'},
+      ]);
+  const [tabIndex, setTabIndex] = useState(3);
 
   function onChangeStatus(id) {
     setTodoItem(
@@ -57,7 +63,23 @@ export function App() {
     })
     return count;
   }
+
+  function onClearCompleted() {
+    setTodoItem(
+      todoItem.map(
+        item => {
+          if(item.isComplete) {
+            return ({...item, isDelete: true});
+          }
+          return item;
+      })
+    )
+  }
   
+  function onShowTab(value) {
+    setTabIndex(value);
+  }
+
   return (
     <div className="App">
       <div className="container">
@@ -66,9 +88,14 @@ export function App() {
         <TodoList
           todoItem = { todoItem }
           onChangeStatus = { onChangeStatus }
-          onDelete = { onDelete }/>
+          onDelete = { onDelete }
+          tabIndex = { tabIndex }/>
         <Footer
-          item = { countTodo() }/>
+          item = { countTodo() } 
+          onClear = { onClearCompleted }
+          changeTabIndex = { onShowTab }
+          tab = { tab }
+          tabIndex = { tabIndex }/>
       </div>
     </div>
   );
