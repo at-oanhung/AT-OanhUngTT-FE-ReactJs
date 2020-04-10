@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { AddTodo } from './components/AddTodo';
 import { TodoList } from './components/TodoList';
@@ -79,6 +79,37 @@ export function App() {
   function onShowTab(value) {
     setTabIndex(value);
   }
+  
+  const numberTodo = countTodo();
+  useEffect(() => {
+    document.title = `Todo (${numberTodo})`;
+  }, [numberTodo]);
+
+  useEffect(() => {
+    const todoList = JSON.parse(localStorage.getItem('todoList'));
+    if(todoList) {
+      setTodoItem(todoList);
+    } else {
+      localStorage.setItem('todoList', JSON.stringify(todoItem));
+    }
+  },[]);
+
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoItem));
+  },[todoItem]);
+  
+  useEffect(() => {
+    const tabName = JSON.parse(localStorage.getItem('tabName'));
+    if(tabName) {
+      setTabIndex(tabName);
+    } else {
+      localStorage.setItem('tabName', JSON.stringify(tabIndex));
+    }
+  },[]);
+
+  useEffect(() => {
+    localStorage.setItem('tabName', JSON.stringify(tabIndex));
+  },[tabIndex]);
 
   return (
     <div className="App">
@@ -91,7 +122,7 @@ export function App() {
           onDelete = { onDelete }
           tabIndex = { tabIndex }/>
         <Footer
-          item = { countTodo() } 
+          item = { numberTodo } 
           onClear = { onClearCompleted }
           changeTabIndex = { onShowTab }
           tab = { tab }
