@@ -1,0 +1,70 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;;
+}
+
+.App .container {
+  width: 40%;
+  // border: 1px solid #000000;
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.43); 
+  box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.43);
+}
+
+.App-header h1{
+  text-align: center;
+  color: #67a711;
+  font-size: 30px;
+  padding: 15px 0;
+}
+
+.AddTodo {
+  input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+.TodoList {
+  width: 100%;
+  height: 320px;
+  overflow: auto;
+}
+
+.TodoItem {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #999999;
+  input {
+    width: 15%;
+  }
+  label {
+    width: 85%;
+  }
+  button {
+    position: absolute;
+    right: 40px;
+    color: #c51010;
+    display: none;
+  }
+  &:hover {
+    button {
+      display: inline;
+    }
+  }
+}
+
+.TodoItem.active {
+  opacity: 0.25;
+  text-decoration: line-through;
+}
+
+.footer-todo {
+  border-top: 1px solid #999999;
+  padding: 15px;
+}

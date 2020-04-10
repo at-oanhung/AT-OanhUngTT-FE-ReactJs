@@ -1,0 +1,14 @@
+button {
+  float: right;
+  margin: 0 3px;
+  background: none;
+  border: 1px solid #ffffff;
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: #67a711;
+  }
+  &.active {
+    border-color: #67a711;
+  }
+} 
