@@ -89,8 +89,6 @@ export function App() {
     const todoList = JSON.parse(localStorage.getItem('todoList'));
     if(todoList) {
       setTodoItem(todoList);
-    } else {
-      localStorage.setItem('todoList', JSON.stringify(todoItem));
     }
   },[]);
 
@@ -102,8 +100,6 @@ export function App() {
     const tabName = JSON.parse(localStorage.getItem('tabName'));
     if(tabName) {
       setTabIndex(tabName);
-    } else {
-      localStorage.setItem('tabName', JSON.stringify(tabIndex));
     }
   },[]);
 

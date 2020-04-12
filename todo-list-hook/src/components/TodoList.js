@@ -20,7 +20,7 @@ export function TodoList(props) {
       {
         todoList(tabIndex).map(
           (item, index) => {
-            if (!item.isDelete) {
+            if(!item.isDelete) {
               return(
                 <TodoItem 
                 key = { item.id }
